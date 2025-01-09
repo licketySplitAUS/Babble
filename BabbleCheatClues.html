@@ -1,0 +1,908 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>licketySplitAUS - You Little Cheater</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <style type="text/css">
+  #g_title p, #g_footer p, #g_description p {
+    margin: 0;
+  }
+  /*
+
+    -- -- -- -- -- -- --
+    Browser Fixes
+    -- -- -- -- -- -- --
+    
+    This file uses CSS filtering methods to fix various
+    layout bugs.
+
+    Each of the following three imported files is a 
+    separate, browser-specific CSS file that keeps all 
+    hacks out of the main style sheet.
+    
+    Over time, as supporting these browsers no longer
+    remains a priority, cleaning up the hacks is as
+    easy as deleting the @import statement below, or
+    simply no longer linking this file from the HTML.
+    
+  */
+
+  /* 
+    fix ie6 "peekaboo bug" using the "holly hack". 
+    Note, this style only gets applied to ie6
+  */
+  * html .wrapper {
+    height: 0.1%;
+  }
+
+  /* 
+   * IE5 mac - overrides the IE/Win hack 
+   */
+
+  /*\*//*/
+
+  * html #threecolumn div {
+    height: auto;
+  }
+
+  /**/
+
+
+  /* 
+   * IE5/Win-specific CSS -ensures #container wraps all content on window resize
+   */
+
+  @media tty {
+   i{content:"\";/*" "*/}} * html #container { height: 1%; } /*";}
+  }/* */
+  /* Styling for editable elements. Eventually, this will be part of the style. */
+  .editable {
+    border: 1px dashed blue;
+  }
+  
+  #footer {
+    clear: both;
+  }
+  
+  /* Extra divs hidden by default. The custom CSS can override this though */
+  #extraDiv1, #extraDiv2, #extraDiv3, #extraDiv4, #extraDiv5, #extraDiv6 {
+    display: none;
+  }
+  
+  a img,:link img,:visited img {border: none;}
+
+
+  /*
+    -- -- -- -- -- -- --
+    1 Column Layout
+    -- -- -- -- -- -- --
+  */
+
+  /* Center #container, constrain to 718px width
+  ----------------------------------------------- */
+  body {
+    text-align: center;
+  }
+  #container {
+    width: 718px;
+    text-align: left;
+    margin: 0 auto;
+  }
+
+  #main-content {
+    overflow: hidden;
+  }
+
+  /** BEGIN CUSTOM SKIN **/
+  /*
+
+    -- -- -- -- -- -- --
+    Base CSS
+    -- -- -- -- -- -- --
+    
+    This file simply removes default styling on most HTML elements in 
+    order to reduce the need to later override them.
+    
+  */
+
+  h1,h2,h3,h4,h5,h6,pre,code,p {font-size: 1em;}
+  dl,li,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,body,html,p,blockquote,fieldset,input {margin: 0; padding: 0;}
+  a img,:link img,:visited img {border: none;}
+  address {font-style: normal;}/*
+
+    -- -- -- -- -- -- --
+    Type Scheme: Deco
+    -- -- -- -- -- -- --
+    
+  */
+
+  body {
+    font: 76% Verdana, sans-serif;
+  } 
+
+  h1, h2, h3, h4, h5, h6, p.description {
+    font-family: "Trebuchet MS", Trebuchet, sans-serif;
+  }
+  h1 {
+    font-size: 3em;
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+  h2 {
+    font-size: 2em;
+    font-weight: normal;
+  }
+  h3 {
+    font-size: 1.5em;
+  }
+  h4 {
+    font-size: 1.2em;
+    letter-spacing: 0.2em;
+  }
+  h5 {
+    font-size: 1.2em;
+  }
+  h6 {
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  p, td {
+    line-height: 1.8em;
+  }
+  code, kbd {
+    font-size: 1.25em;
+  }/*
+
+    -- -- -- -- -- -- --
+    STYLE: Chemise
+    -- -- -- -- -- -- --
+
+  */
+
+
+
+
+  /* ie6win */
+
+  #footer {
+    height: 1%;
+  }
+
+  /* ie5mac */
+
+  /*\*//*/
+  #footer { height: auto; }
+  /**/
+
+  /* ie5 win */
+  @media tty {
+   i{content:"\";/*" "*/}} td, * html th { font-size: 0.8em; } h1 { height: 1%; } /*";}
+  }/* */
+
+  /* Basic HTML style
+  ----------------------------------------------- */
+  a:link {
+    padding: 0 2px;
+  }
+  body {
+    font: 80% "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  }
+  blockquote {
+          margin: 1em 1em;
+          font-style: italic;
+  }
+  caption {
+    font-size: 1em;
+    text-align: left;
+    padding: 4px 6px;
+  }
+    font-weight: bold;
+  }
+  dd {
+    margin: 0 0 1em 1em;
+  }
+  hr {
+    color: #222;
+    background: #222;
+    border-color: #222;
+  }
+  td {
+    padding: 2px 5px;
+    vertical-align: top;
+  }
+  th {
+    font-size: 1em;
+    padding: 2px 5px;
+    text-align: left;
+    border-top: solid 1px #000;
+    border-right: solid 1px #000;
+    border-bottom: solid 1px #000;
+  }
+
+  td p {
+    margin-top: 0;
+  }
+
+  ul li {
+    margin-bottom: 0.8em;
+  }
+  ol li {
+    list-style: lower-alpha;
+    margin-left: 2em;
+    margin-bottom: 0.8em;
+  }
+
+
+
+
+
+
+
+
+  /* Header
+  ----------------------------------------------- */
+  #container {
+  }
+
+  #header {
+    border-bottom: solid 1px #000;
+    position: relative;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  p.description {
+    font-size: 1em;
+    margin: 0;
+    padding: 0.5em 15px;
+    border-bottom: solid 1px #000;
+  }
+  #g_description {
+    margin: 1em 0 1em 15px;
+  }
+
+
+  /* Custom font definitions
+  ----------------------------------------------- */
+  p {
+    margin: 1em 0;
+    line-height: 1.5;
+  }
+  td, td p {
+    line-height: 1.5;
+  }
+  h1,h2,h3,h4,h5,h6 {
+    font-family: "Trebuchet MS", arial, sans-serif;
+  }
+  h1 {
+    text-align: left;
+    font-weight: normal;
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding: 30px 20px 10px 15px;
+    margin: 0;
+    border-top: solid 1px #000;
+    border-bottom: solid 1px #000;
+  }
+  h2 {
+    font-size: 1.5em;
+    color: #000;
+    margin: 0 0 1em 0;
+    background: url(/-/include/style/chemise/slate/h2.gif) no-repeat left bottom;
+
+  }
+  h3 {
+    font-size: 1.2em;
+    padding: 4px 10px;
+    margin-top: 0.5em;
+  }
+  h4 {
+    margin-top: 0.6em;
+    margin-left: 0.2em;
+    font-size: 0.9em;
+  }
+  h5 {
+    padding-left: 10px;
+    font-size: 1em;
+  }
+  h6 {
+    font-size: 0.9em;
+  }
+
+  a:link {
+      color: #f6952e;
+  }
+  a:hover {
+    background-color: #dbd4a6;
+  }
+
+  /* sidebar
+  ----------------------------------------------- */
+  #sidebar, #sidebar-alternate {
+    margin-bottom: 2em;
+  }
+  #sidebar h3, #sidebar-alternate h3 {
+    font-weight: normal;
+    font-size: 1.3em;
+    border-top: solid 1px #000;
+    margin-bottom: 0.5em;
+  }
+  #sidebar h4, #sidebar h5, #sidebar h6,
+  #sidebar-alternate h4, #sidebar-alternate h5, #sidebar-alternate h6,
+  #sidebar p, #sidebar-alternate p {
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+
+  #sidebar li, #sidebar-alternate li {
+    margin-bottom: 0.8em;
+  }
+  #sidebar .links {
+    margin-bottom: 2em;
+  }
+  #adsense {
+    text-align: center;
+  }
+
+
+  .editable {
+    border: dashed 1px #666;
+  }
+
+
+
+  /* layout patches
+  ----------------------------------------------- */
+  #twocolumn-liquid-left #sidebar {
+    float: left;
+  }
+  #twocolumn-liquid-right #sidebar {
+    float: right;
+  }
+  #threecolumn #sidebar-alternate {
+    float: right;
+  }
+
+
+
+  /* Footer
+  ----------------------------------------------- */
+  #footer {
+    padding: 1px 15px;
+    border-top: solid 1px #000;
+    border-bottom: solid 1px #000;
+    clear: both;
+  }
+  #footer hr {
+    display: none;
+  }
+
+
+
+  /* fixed 1 column
+  ----------------------------------------------- */
+  #onecolumn #main-content .wrapper {
+    margin: 20px;
+  }
+
+
+  /* fixed left 2 column
+  ----------------------------------------------- */
+  #twocolumn-left #main-content .wrapper {
+    padding: 0 20px;
+  }
+
+
+
+  /* fixed right 2 column
+  ----------------------------------------------- */
+  #twocolumn-right #main-content .wrapper {
+    padding: 0 20px;
+  }
+
+  /* fixed right 3 column
+  ----------------------------------------------- */
+  #threecolumn #main-content .wrapper {
+    padding: 0 20px;
+  }
+  #threecolumn #sidebar h3, #threecolumn #sidebar-alternate h3 {
+    margin-bottom: 0;
+  }
+
+  /* liquid left 2 column
+  ----------------------------------------------- */
+  #twocolumn-liquid-left #main-content .wrapper {
+    margin: 0 20px;
+  }
+
+
+  /* liquid right 2 column
+  ----------------------------------------------- */
+  #twocolumn-liquid-right #main-content .wrapper {
+    margin: 0 20px;
+  }
+  /*
+
+    -- -- -- -- -- -- --
+    COLOR SCHEME: Ember
+    -- -- -- -- -- -- --
+
+  */
+
+
+  /* Basic HTML style
+  ----------------------------------------------- */
+  body {
+    color: #323229;
+    background: #BFBFBF url(/-/includes/style/chemise/ember/body-bg.gif) repeat-y center top;
+  }
+  caption {
+    color: #fff;
+    background: #2AA63B url(/-/includes/style/chemise/ember/h3.gif) repeat;
+  }
+  code, kbd {
+    color: #F68A21;
+  }
+  dt {
+    color: #F68A21;
+  }
+  hr {
+    background: #604829;
+    border-color: #604829;
+    border-top: none;
+  }
+  th {
+    color: #fff;
+    background: #F6922E url(/-/includes/style/chemise/ember/th.gif) repeat-x 0 0;
+    border-top: solid 1px #F8A54C;
+    border-right: solid 1px #F4782D;
+    border-bottom: solid 1px #F4782D;
+  }
+
+  ul li {
+    list-style: url(/-/includes/style/chemise/ember/h5.gif);
+  }
+
+
+
+
+
+
+  /* Header
+  ----------------------------------------------- */
+  #container {
+    background: none;
+  }
+
+  #header {
+    border-bottom: solid 3px #fff;
+  }
+  p.description {
+    color: #fff;
+    background: #F68B20 url(/-/includes/style/chemise/ember/description.gif) repeat-x 0 0;
+    border-top: solid 1px #F4782D;
+    border-bottom: solid 1px #F8A54C;
+  }
+
+
+
+  /* Custom font definitions
+  ----------------------------------------------- */
+  h1 {
+    color: #fff;
+    background: #55554C url(/-/includes/style/chemise/ember/h1.gif) repeat-x left bottom;
+    border-top: solid 1px #72726E;
+    border-bottom: solid 3px #53534A;
+  }
+  h2 {
+    color: #B4543D;
+    background: url(/-/includes/style/chemise/ember/h2.gif) no-repeat left bottom;
+  }
+  h3 {
+    color: #fff;
+    background: #45453B url(/-/includes/style/chemise/ember/h3.gif) repeat;
+  }
+  h4 {
+    color: #B4543D;
+  }
+  h5 {
+    color: #F68A21;
+    background: url(/-/includes/style/chemise/ember/h5.gif) no-repeat 0 0.5em;
+  }
+
+
+  /* sidebar
+  ----------------------------------------------- */
+  #sidebar, #sidebar-alternate {
+    background: url(/-/includes/style/chemise/ember/sidebar.gif) no-repeat right 0;
+  }
+  #sidebar h3, #sidebar-alternate h3 {
+    color: #B4543D;
+    background: none;
+    border-top: none;
+  }
+
+
+  /* liquid variation
+  ----------------------------------------------- */
+  #twocolumn-liquid-left #container, #twocolumn-liquid-right #container {
+    background: #F0ECCD url(/-/includes/style/chemise/ember/container-liquid-left.gif) repeat-y left top;
+  }
+  #twocolumn-liquid-left #container .wrapper, #twocolumn-liquid-right #container .wrapper {
+    background: url(/-/includes/style/chemise/ember/container-liquid-right.gif) repeat-y right top;
+  }
+  #twocolumn-liquid-left #container .wrapper .wrapper, #twocolumn-liquid-right #container .wrapper .wrapper {
+    background: none;
+  }
+
+
+  #twocolumn-right #sidebar, #twocolumn-liquid-right #sidebar, #threecolumn #sidebar-alternate {
+    background: url(/-/includes/style/chemise/ember/sidebar.gif) no-repeat left 0;
+  }
+
+
+
+  .editable {
+    border: dashed 1px #f60;
+  }
+
+
+
+  /* Footer
+  ----------------------------------------------- */
+  #footer {
+    color: #fff;
+    background: #55554C url(/-/includes/style/chemise/ember/h1.gif) repeat-x left bottom;
+    border-top: solid 1px #72726E;
+    border-bottom: solid 3px #53534A;
+  }
+
+  /** END CUSTOM SKIN **/
+  </style>
+
+  <!-- Hack to avoid flash of unstyled content in IE -->
+  <script> </script>
+</head>
+
+<body id="onecolumn">
+  <div id="container">
+    <div class="wrapper">
+      <div id="header">
+        <div class="wrapper">
+          <h1 id="page-title"><div id="g_title">You Little Cheater</div></h1>
+          <div style="clear: both;"></div>
+          <p class="description"><div id="g_description"><p></p>You know you want it!</div></p>
+          <div style="clear: both"></div>
+        </div>
+      </div>
+      
+      <div id="main-content">
+        <div class="wrapper">
+          <div class="content-item"><div id="g_body">
+
+<STRONG>Babble Clues for Puzzle 7959 - Wed 08 Jan 2025</STRONG><BR>
+<BR>
+<BR>
+001 001 : (1,3)   aa4,5   AAHS           <BR>
+<BR>
+002 001 : (1,3)   av4,7   AVES           <BR>
+<BR>
+003 001 : (1,2)   da4,6   DAHS           <BR>
+004 002 : (1,2)   da8,45   DAINTIES       <BR>
+005 003 : (1,2)   da9,60   DAINTIEST      <BR>
+006 004 : (1,2)   da4,5   DAIS           <BR>
+007 005 : (1,2)   da5,18   DAVEN          <BR>
+<BR>
+008 001 : (1,2)   do4,5   DOES           <BR>
+009 002 : (1,2)   do5,12   DOEST          <BR>
+010 003 : (1,2)   do5,14   DOETH          <BR>
+011 004 : (1,2)   do7,36   DOPIEST        <BR>
+<BR>
+012 001 : (2,5)   ea4,7   EAVE           <BR>
+013 002 : (2,5)   ea5,16   EAVES          <BR>
+<BR>
+014 001 : (2,5)   et4,5   ETHS           <BR>
+<BR>
+015 001 : (3,3)   ev4,7   EVEN           <BR>
+016 002 : (2,5)   ev4,7   EVES           <BR>
+<BR>
+017 001 : (3,4)   ha4,5   HAES           <BR>
+018 002 : (3,4)   ha4,5   HAET           <BR>
+019 003 : (3,4)   ha5,12   HAETS          <BR>
+020 004 : (3,4)   ha4,8   HAVE           <BR>
+021 005 : (3,4)   ha5,18   HAVEN          <BR>
+022 006 : (3,4)   ha5,18   HAVES          <BR>
+<BR>
+023 001 : (3,4)   he4,6   HEAD           <BR>
+024 002 : (3,4)   he5,18   HEAVE          <BR>
+025 003 : (3,4)   he6,30   HEAVEN         <BR>
+026 004 : (3,4)   he6,30   HEAVES         <BR>
+027 005 : (3,4)   he6,21   HEINIE         <BR>
+028 006 : (3,4)   he7,32   HEINIES        <BR>
+029 007 : (3,4)   he5,12   HEIST          <BR>
+030 008 : (3,4)   he4,5   HEST           <BR>
+031 009 : (3,4)   he4,5   HETS           <BR>
+<BR>
+032 001 : (4,2)   in4,4   INIA           <BR>
+033 002 : (3,2)   in4,4   INTI           <BR>
+034 003 : (3,2)   in5,10   INTIS          <BR>
+<BR>
+035 001 : (5,4)   ki4,8   KITE           <BR>
+036 002 : (5,4)   ki5,18   KITES          <BR>
+037 003 : (5,4)   ki4,9   KITH           <BR>
+038 004 : (5,4)   ki5,20   KITHE          <BR>
+039 005 : (5,4)   ki6,33   KITHES         <BR>
+040 006 : (5,4)   ki5,20   KITHS          <BR>
+041 007 : (5,4)   ki4,8   KITS           <BR>
+042 008 : (5,4)   ki6,30   KITTEN         <BR>
+<BR>
+043 001 : (5,1)   mi4,5   MINI           <BR>
+044 002 : (5,1)   mi5,12   MINIS          <BR>
+045 003 : (5,1)   mi6,24   MINISH         <BR>
+046 004 : (5,1)   mi7,48   MINISKI        <BR>
+047 005 : (5,1)   mi4,5   MINT           <BR>
+048 006 : (5,1)   mi5,12   MINTS          <BR>
+049 007 : (5,1)   mi4,5   MISE           <BR>
+050 008 : (5,1)   mi4,5   MIST           <BR>
+051 009 : (5,1)   mi4,5   MITE           <BR>
+052 010 : (5,1)   mi5,12   MITES          <BR>
+<BR>
+053 001 : (1,5)   na4,7   NAVE           <BR>
+054 002 : (1,5)   na5,16   NAVES          <BR>
+055 003 : (1,5)   na7,40   NAVETTE        <BR>
+056 004 : (1,5)   na8,55   NAVETTES       <BR>
+<BR>
+057 001 : (1,5)   ne4,4   NETT           <BR>
+058 002 : (1,5)   ne5,10   NETTS          <BR>
+059 003 : (1,5)   ne4,7   NEVE           <BR>
+060 004 : (1,5)   ne5,16   NEVES          <BR>
+<BR>
+061 001 : (4,1)   ni5,16   NIEVE          <BR>
+062 002 : (4,1)   ni5,10   NISEI          <BR>
+063 003 : (4,1)   ni4,4   NISI           <BR>
+064 004 : (4,1)   ni4,4   NITE           <BR>
+065 005 : (4,1)   ni5,10   NITES          <BR>
+066 006 : (4,1)   ni4,4   NITS           <BR>
+<BR>
+067 001 : (2,2)   oa5,16   OAVES          <BR>
+<BR>
+068 001 : (3,1)   pi4,5   PIES           <BR>
+069 002 : (3,1)   pi7,32   PINIEST        <BR>
+070 003 : (3,1)   pi6,21   PINITE         <BR>
+071 004 : (3,1)   pi7,32   PINITES        <BR>
+072 005 : (3,1)   pi4,5   PINT           <BR>
+073 006 : (3,1)   pi5,12   PINTS          <BR>
+074 007 : (3,1)   pi4,6   PISH           <BR>
+075 008 : (3,1)   pi5,12   PISTE          <BR>
+076 009 : (3,1)   pi4,5   PITS           <BR>
+<BR>
+077 001 : (3,1)   po5,14   PODIA          <BR>
+078 002 : (3,1)   po4,5   POET           <BR>
+079 003 : (3,1)   po5,12   POETS          <BR>
+080 004 : (3,1)   po5,12   POINT          <BR>
+081 005 : (3,1)   po6,21   POINTE         <BR>
+082 006 : (3,1)   po7,32   POINTES        <BR>
+083 007 : (3,1)   po9,60   POINTIEST      <BR>
+084 008 : (3,1)   po6,21   POINTS         <BR>
+085 009 : (3,1)   po4,5   POIS           <BR>
+086 010 : (3,1)   po5,12   POISE          <BR>
+087 011 : (3,1)   po6,24   POISHA         <BR>
+<BR>
+088 001 : (4,3)   se4,4   SETT           <BR>
+089 002 : (4,3)   se5,16   SEVEN          <BR>
+<BR>
+090 001 : (4,3)   sh4,6   SHAD           <BR>
+091 002 : (4,3)   sh5,18   SHAVE          <BR>
+092 003 : (4,3)   sh6,30   SHAVEN         <BR>
+093 004 : (4,3)   sh4,5   SHEA           <BR>
+094 005 : (4,3)   sh6,30   SHEAVE         <BR>
+095 006 : (4,3)   sh5,20   SHTIK          <BR>
+<BR>
+096 001 : (4,3)   si5,16   SIEVE          <BR>
+097 002 : (4,3)   si4,4   SITE           <BR>
+<BR>
+098 001 : (4,3)   sk5,18   SKEIN          <BR>
+099 002 : (4,3)   sk4,8   SKIT           <BR>
+100 003 : (4,3)   sk5,18   SKITE          <BR>
+<BR>
+101 001 : (4,3)   st5,12   STEAD          <BR>
+102 002 : (4,3)   st5,10   STEIN          <BR>
+103 003 : (4,3)   st4,4   STET           <BR>
+<BR>
+104 001 : (4,4)   te5,12   TEIID          <BR>
+105 002 : (5,2)   te7,44   TEKTITE        <BR>
+106 003 : (5,2)   te8,60   TEKTITES       <BR>
+107 004 : (4,4)   te4,4   TEST           <BR>
+108 005 : (5,2)   te4,5   TETH           <BR>
+109 006 : (5,2)   te5,12   TETHS          <BR>
+110 007 : (4,4)   te4,4   TETS           <BR>
+<BR>
+111 001 : (3,5)   th4,5   THAE           <BR>
+112 002 : (3,5)   th5,12   THEIN          <BR>
+113 003 : (3,5)   th6,21   THEIST         <BR>
+114 004 : (3,5)   th4,5   THEN           <BR>
+115 005 : (3,5)   th5,12   THESE          <BR>
+<BR>
+116 001 : (5,2)   ti4,4   TIES           <BR>
+117 002 : (4,4)   ti4,8   TIKE           <BR>
+118 003 : (4,4)   ti5,18   TIKES          <BR>
+119 004 : (5,2)   ti7,28   TINIEST        <BR>
+120 005 : (5,2)   ti4,5   TIPI           <BR>
+121 006 : (5,2)   ti5,12   TIPIS          <BR>
+122 007 : (4,4)   ti5,12   TITHE          <BR>
+123 008 : (4,4)   ti6,21   TITHES         <BR>
+124 009 : (4,5)   ti4,4   TITS           <BR>
+<BR>
+125 001 : (2,4)   va4,7   VAIN           <BR>
+126 002 : (2,4)   va4,7   VANE           <BR>
+<BR>
+127 001 : (2,4)   ve4,7   VEIN           <BR>
+128 002 : (2,4)   ve8,55   VEINIEST       <BR>
+129 003 : (2,4)   ve4,7   VENA           <BR>
+130 004 : (2,4)   ve4,7   VEST           <BR>
+131 005 : (2,4)   ve4,7   VETS           <BR>
+
+<BR>
+<BR>
+AAHS<BR>
+AVES<BR>
+DAHS<BR>
+DAINTIES<BR>
+DAINTIEST<BR>
+DAIS<BR>
+DAVEN<BR>
+DOES<BR>
+DOEST<BR>
+DOETH<BR>
+DOPIEST<BR>
+EAVE<BR>
+EAVES<BR>
+ETHS<BR>
+EVEN<BR>
+EVES<BR>
+HAES<BR>
+HAET<BR>
+HAETS<BR>
+HAVE<BR>
+HAVEN<BR>
+HAVES<BR>
+HEAD<BR>
+HEAVE<BR>
+HEAVEN<BR>
+HEAVES<BR>
+HEINIE<BR>
+HEINIES<BR>
+HEIST<BR>
+HEST<BR>
+HETS<BR>
+INIA<BR>
+INTI<BR>
+INTIS<BR>
+KITE<BR>
+KITES<BR>
+KITH<BR>
+KITHE<BR>
+KITHES<BR>
+KITHS<BR>
+KITS<BR>
+KITTEN<BR>
+MINI<BR>
+MINIS<BR>
+MINISH<BR>
+MINISKI<BR>
+MINT<BR>
+MINTS<BR>
+MISE<BR>
+MIST<BR>
+MITE<BR>
+MITES<BR>
+NAVE<BR>
+NAVES<BR>
+NAVETTE<BR>
+NAVETTES<BR>
+NETT<BR>
+NETTS<BR>
+NEVE<BR>
+NEVES<BR>
+NIEVE<BR>
+NISEI<BR>
+NISI<BR>
+NITE<BR>
+NITES<BR>
+NITS<BR>
+OAVES<BR>
+PIES<BR>
+PINIEST<BR>
+PINITE<BR>
+PINITES<BR>
+PINT<BR>
+PINTS<BR>
+PISH<BR>
+PISTE<BR>
+PITS<BR>
+PODIA<BR>
+POET<BR>
+POETS<BR>
+POINT<BR>
+POINTE<BR>
+POINTES<BR>
+POINTIEST<BR>
+POINTS<BR>
+POIS<BR>
+POISE<BR>
+POISHA<BR>
+SETT<BR>
+SEVEN<BR>
+SHAD<BR>
+SHAVE<BR>
+SHAVEN<BR>
+SHEA<BR>
+SHEAVE<BR>
+SHTIK<BR>
+SIEVE<BR>
+SITE<BR>
+SKEIN<BR>
+SKIT<BR>
+SKITE<BR>
+STEAD<BR>
+STEIN<BR>
+STET<BR>
+TEIID<BR>
+TEKTITE<BR>
+TEKTITES<BR>
+TEST<BR>
+TETH<BR>
+TETHS<BR>
+TETS<BR>
+THAE<BR>
+THEIN<BR>
+THEIST<BR>
+THEN<BR>
+THESE<BR>
+TIES<BR>
+TIKE<BR>
+TIKES<BR>
+TINIEST<BR>
+TIPI<BR>
+TIPIS<BR>
+TITHE<BR>
+TITHES<BR>
+TITS<BR>
+VAIN<BR>
+VANE<BR>
+VEIN<BR>
+VEINIEST<BR>
+VENA<BR>
+VEST<BR>
+VETS<BR>
+
+</div></div>
+          <div style="clear: both"></div>
+        </div>
+      </div>
+
+      <div id="footer"><div class="wrapper">
+        <hr>
+        <p><div id="g_footer"><p></p>You little Cheater ;-)</div></p>
+        <div style="clear: both"></div>
+      </div></div>
+
+    </div>
+  </div>
+
+
+<div id="extraDiv1"><span></span></div><div id="extraDiv2"><span></span></div>
+<div id="extraDiv3"><span></span></div><div id="extraDiv4"><span></span></div>
+<div id="extraDiv5"><span></span></div><div id="extraDiv6"><span></span></div>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-587652-1";
+urchinTracker();
+</script>
+</body>
+</html>
+

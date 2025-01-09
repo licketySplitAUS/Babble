@@ -1,0 +1,716 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+  <title>licketySplitAUS - What&#39;s the Story</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <style type="text/css">
+  #g_title p, #g_footer p, #g_description p {
+    margin: 0;
+  }
+  /*
+
+  	-- -- -- -- -- -- --
+  	Browser Fixes
+  	-- -- -- -- -- -- --
+  	
+  	This file uses CSS filtering methods to fix various
+  	layout bugs.
+
+  	Each of the following three imported files is a 
+  	separate, browser-specific CSS file that keeps all 
+  	hacks out of the main style sheet.
+  	
+  	Over time, as supporting these browsers no longer
+  	remains a priority, cleaning up the hacks is as
+  	easy as deleting the @import statement below, or
+  	simply no longer linking this file from the HTML.
+  	
+  */
+
+  /* 
+    fix ie6 "peekaboo bug" using the "holly hack". 
+    Note, this style only gets applied to ie6
+  */
+  * html .wrapper {
+    height: 0.1%;
+  }
+
+  /* 
+   * IE5 mac - overrides the IE/Win hack 
+   */
+
+  /*\*//*/
+
+  * html #threecolumn div {
+  	height: auto;
+  }
+
+  /**/
+
+
+  /* 
+   * IE5/Win-specific CSS -ensures #container wraps all content on window resize
+   */
+
+  @media tty {
+   i{content:"\";/*" "*/}} * html #container { height: 1%; } /*";}
+  }/* */
+  /* Styling for editable elements. Eventually, this will be part of the style. */
+  .editable {
+    border: 1px dashed blue;
+  }
+  
+  #footer {
+    clear: both;
+  }
+  
+  /* Extra divs hidden by default. The custom CSS can override this though */
+  #extraDiv1, #extraDiv2, #extraDiv3, #extraDiv4, #extraDiv5, #extraDiv6 {
+    display: none;
+  }
+  
+  a img,:link img,:visited img {border: none;}
+
+
+  body {
+    text-align: center;
+  }
+  #container {
+    width: 718px;
+    text-align: left;
+    margin: 0 auto;
+  }
+  /** BEGIN CUSTOM SKIN **/
+  /*
+
+  	-- -- -- -- -- -- --
+  	Base CSS
+  	-- -- -- -- -- -- --
+  	
+  	This file simply removes default styling on most HTML elements in 
+  	order to reduce the need to later override them.
+  	
+  */
+
+  h1,h2,h3,h4,h5,h6,pre,code,p {font-size: 1em;}
+  dl,li,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,body,html,p,blockquote,fieldset,input {margin: 0; padding: 0;}
+  a img,:link img,:visited img {border: none;}
+  address {font-style: normal;}/*
+
+  	-- -- -- -- -- -- --
+  	Type Scheme: Deco
+  	-- -- -- -- -- -- --
+  	
+  */
+
+  body {
+  	font: 76% Verdana, sans-serif;
+  }	
+
+  h1, h2, h3, h4, h5, h6, p.description {
+  	font-family: "Trebuchet MS", Trebuchet, sans-serif;
+  }
+  h1 {
+  	font-size: 3em;
+  	font-weight: bold;
+  	letter-spacing: 2px;
+  }
+  h2 {
+  	font-size: 2em;
+  	font-weight: normal;
+  }
+  h3 {
+  	font-size: 1.5em;
+  }
+  h4 {
+  	font-size: 1.2em;
+  	letter-spacing: 0.2em;
+  }
+  h5 {
+  	font-size: 1.2em;
+  }
+  h6 {
+  	font-size: 1em;
+  	font-weight: bold;
+  }
+
+  p, td {
+  	line-height: 1.8em;
+  }
+  code, kbd {
+  	font-size: 1.25em;
+  }/*
+
+  	-- -- -- -- -- -- --
+  	STYLE: Victoria
+  	-- -- -- -- -- -- --
+
+  */
+
+
+  /* ie6win */
+
+  /* IE/Win fixes for various layouts
+  ----------------------------------------------- */
+  * html #threecolumn #main-content {
+  	width: 429px;
+  	margin-left: -2px;
+  }
+
+  /* ie5mac */
+
+  /*\*//*/
+  * html #threecolumn #main-content {
+  	width: 429px;
+  	margin-left: 0;
+  }
+  /**/
+
+  /* ie5win */
+
+  @media tty {
+   i{content:"\";/*" "*/}} td { font-size: 0.8em; } #footer p { margin: 0; padding: 1em 0; } /*";}
+  }/* */
+
+
+  /* Basic HTML style
+  ----------------------------------------------- */
+  a:link {
+  	text-decoration: underline;
+  }
+  a:visited {
+  	text-decoration: underline;
+  }
+  body {
+  	font: 80% "Georgia", serif;
+  	margin: 0;
+  	padding: 25px 0 25px 0;
+  	border-top: solid 3px #fff;
+  	border-bottom: solid 3px #fff;
+  }
+  caption {
+  	font-size: 1.2em;
+  	font-style: italic;
+  	text-align: left;
+  	padding: 1px 4px 4px 4px;
+  	margin-bottom: 4px;
+  	border-bottom: solid 1px #ccc;
+  }
+  dt {
+  	font-weight: bold;
+  }
+  dd {
+  	font-style: italic;
+  	margin: 0 0 1em 1em;
+  }
+  h2 {
+  	font-size: 1.4em;
+  	font-weight: normal;
+  	margin: 1em 0;
+  	padding-bottom: 3px;
+  }
+  h3 {
+  	font-size: 1.2em;
+  	font-weight: normal;
+  	font-style: normal;
+  	padding-bottom: 8px;
+  	margin-top: 1em;
+  	margin-bottom: 0.5em;
+  }
+  h4 {
+  	font-size: 1.1em;
+  	letter-spacing: 0.1em;
+  	padding-left: 12px;
+  	margin: 1.5em 0 1em 0;
+  }
+  h5 {
+  	padding-bottom: 2px;
+  	margin: 1.5em 0 1em 0;
+  }
+  h6 {
+  	font-weight: normal;
+  	letter-spacing: 0.1em;
+  	margin: 1em 0;
+  }
+  hr {
+  	margin: 2em 0;
+  	border-style: none;
+  	height: 1px;
+  }
+  p {
+  	line-height: 1.6;
+  	margin: 1em 0;
+  }
+  td {
+  	vertical-align: top;
+  	padding: 1px 4px;
+  }
+  td p {
+  	margin: 0 0 1em 0;
+  }
+  th {
+  	text-align: left;
+  	font-weight: normal;
+  	font-style: italic;
+  	vertical-align: top;
+  	padding: 1px 4px;
+  }
+
+
+  ul, ol, dl {
+  	margin-bottom: 1.6em;
+  	padding-left: 2em;
+  	margin-left: 0;
+  }
+
+  ul li {
+  	list-style: circle;
+  	margin-bottom: 0.8em;
+  }
+  ol li {
+  	list-style: upper-roman;
+  	margin-left: 2em;
+  	margin-bottom: 0.8em;
+  }
+
+
+
+
+  /* Header
+  ----------------------------------------------- */
+  h1 {
+  	padding-top: 25px;
+  	font-size: 2.4em;
+  	letter-spacing: 0.1em;
+  	text-align: center;
+  }
+  #g_description {
+  	font-style: italic;
+  	text-align: center;
+  	padding-bottom: 15px;
+  	margin: 0;
+  	line-height: 1;
+  }
+
+
+  /* content
+  ----------------------------------------------- */
+  #main-content .wrapper {
+  	margin: 0 25px;
+  }
+
+
+
+  /* sidebar
+  ----------------------------------------------- */
+
+  #sidebar .wrapper {
+  	padding-left: 15px;
+  	padding-right: 5px;
+  }
+
+  #sidebar .wrapper h3 {
+  	padding: 0 0 11px 0;
+  }
+
+
+  #sidebar li {
+  	margin-bottom: 0.8em;
+  }
+  #sidebar .wrapper ul li {
+  	list-style: circle;
+  }
+  #sidebar .wrapper ol li {
+  	list-style: upper-roman;
+  }
+
+  #sidebar .links {
+  	margin-bottom: 2em;
+  }
+
+
+  #adsense, #adsense .wrapper {
+  	text-align: left;
+  	margin: 0;
+  	padding: 0;
+  }
+
+
+  /* footer
+  ----------------------------------------------- */
+  #footer {
+  	margin: 0;
+  	font-style: italic;
+  	font-size: 0.9em;
+  }
+  #footer hr {
+  	display: none;
+  }
+
+  /* header
+  ----------------------------------------------- */
+  #header #page-title {
+  	padding-left: 12px;
+  	padding-right: 12px;
+  }
+
+  #header #g_description {
+  	margin-left: 12px;
+  	margin-right: 12px;
+  }
+
+  /* fixed 1 column
+  ----------------------------------------------- */
+  #onecolumn #header .wrapper {
+  	padding-bottom: 10px;
+  }
+  #onecolumn #footer {
+  	padding: 0 25px 10px 25px;
+  }
+
+
+
+  /* fixed left 2 column
+  ----------------------------------------------- */
+  #twocolumn-left #header .wrapper {
+  	padding-bottom: 10px;
+  }
+  #twocolumn-left #footer {
+  	padding: 0 25px 10px 264px;
+  }
+
+
+  /* fixed right 2 column
+  ----------------------------------------------- */
+  #twocolumn-right #header .wrapper {
+  	padding-bottom: 10px;
+  }
+  #twocolumn-right #footer {
+  	padding: 0 264px 10px 25px;
+  }
+
+
+  /* fixed 3 column
+  ----------------------------------------------- */
+  #threecolumn #header .wrapper {
+  	padding-bottom: 10px;
+  }
+  #threecolumn #footer {
+  	padding: 0 168px 10px 168px;
+  }
+  #sidebar-alternate {
+  	width: 129px;
+  }
+
+
+  /* liquid 2 column, right and left
+  ----------------------------------------------- */
+  #twocolumn-liquid-left, #twocolumn-liquid-right {
+  	padding: 0;
+  	border: 0;
+  	border-top: solid 1px #999;
+  }
+
+  #twocolumn-liquid-left h1, #twocolumn-liquid-right h1 {
+  	margin: 0;
+  }
+
+
+  #twocolumn-liquid-left #footer, #twocolumn-liquid-right #footer {
+  	padding: 0;
+  	margin: 0;
+  }
+  #twocolumn-liquid-left #container #footer .wrapper, #twocolumn-liquid-right #container #footer .wrapper {
+  	padding: 10px 25px 10px 25px;
+  	text-align: center;
+  }
+
+
+
+
+  #twocolumn-liquid-left #sidebar .wrapper *, #twocolumn-liquid-right #sidebar .wrapper * {
+  	margin-left: 0;
+  	margin-right: 0;
+  }
+  #twocolumn-liquid-left #sidebar h3, #twocolumn-liquid-right #sidebar h3 {
+  	padding-left: 0;
+  }
+  #twocolumn-liquid-left #sidebar ul, #twocolumn-liquid-left #sidebar ol,
+  #twocolumn-liquid-right #sidebar ul, #twocolumn-liquid-right #sidebar ol {
+  	padding-left: 2.5em;
+  	/* extra wide for IE's sake */
+  }
+  #twocolumn-liquid-left #sidebar .links ul, #twocolumn-liquid-right #sidebar .links ul {
+  	padding-left: 0;
+  }
+
+
+
+
+
+
+
+  /* editable area borders
+  ----------------------------------------------- */
+  .editable {
+  	border: dashed 1px #f00;
+  }
+  #onecolumn .editmode h1, #twocolumn-left .editmode h1, #twocolumn-right .editmode h1, #threecolumn .editmode h1 {
+  	background-position: -1px 0;
+  }
+  #twocolumn-liquid-left .editmode h1, #twocolumn-liquid-right .editmode h1 {
+  	background-position: 0 -1px;
+  }
+  /*
+
+  	-- -- -- -- -- -- --
+  	COLOR SCHEME: Desert
+  	-- -- -- -- -- -- --
+
+  */
+
+
+  /* Basic HTML style */
+
+
+  a:link {
+  	color: #C0472F;
+  }
+  a:visited {
+  	color: #93584D;
+  }
+  a:hover {
+  	color: #E64C2D;
+  }
+  body {
+  	color: #2B1E1B;
+  	background: #F0D894 url(/-/includes/style/victoria/desert/container.gif) repeat-x left top;
+  }
+  caption {
+  	border-bottom-color: #ccc;
+  }
+  h2 {
+  	color: #93584D;
+  	background: url(/-/includes/style/victoria/desert/h2-border.gif) repeat-x left bottom;
+  }
+  h3 {
+  	color: #28728B;
+  	background: url(/-/includes/style/victoria/desert/h3-border.gif) repeat-x left bottom;
+  }
+  h4 {
+  	color: #A5A4A5;
+  	background: url(/-/includes/style/victoria/desert/h4-deco.gif) no-repeat 0 5px;
+  }
+  h5 {
+  	color: #28728B;
+  	background: url(/-/includes/style/victoria/desert/h5-border.gif) repeat-x left bottom;
+  }
+  h6 {
+  }
+  hr {
+  	color: #C7C7C7;
+  	background: #C7C7C7;
+  	border-color: #C7C7C7;
+  }
+  td {
+  	vertical-align: top;
+  	padding: 1px 4px;
+  }
+
+
+
+
+  /* Header
+  ----------------------------------------------- */
+  h1 {
+  	color: #fff;
+  }
+  #g_description {
+  	color: #28728B;
+  }
+
+
+
+  /* fixed-width common header
+  ----------------------------------------------- */
+  #onecolumn h1, #twocolumn-left h1, #twocolumn-right h1, #threecolumn h1 {
+  	background: url(/-/includes/style/victoria/desert/fixed-h1.gif) no-repeat;
+  }
+  #onecolumn #header, #twocolumn-left #header, #twocolumn-right #header, #threecolumn #header {
+  	background: url(/-/includes/style/victoria/desert/fixed-header.gif) repeat-y;
+  }
+
+
+  #footer {
+  	color: #78AFC1;
+  }
+
+  /* fixed 1 column
+  ----------------------------------------------- */
+  #onecolumn #header .wrapper {
+  	background: url(/-/includes/style/victoria/desert/fixed-one-headerwrapper.gif) no-repeat left bottom;
+  }
+  #onecolumn #container {
+  	background: url(/-/includes/style/victoria/desert/fixed-one-container.gif) repeat-y;
+  }
+  #onecolumn #footer {
+  	background: url(/-/includes/style/victoria/desert/fixed-one-footer.gif) no-repeat left bottom;
+  }
+
+
+
+  #sidebar .wrapper h3 {
+  	background-image: url(/-/includes/style/victoria/desert/h3-sidebar-border.gif);
+  }
+
+  .editable {
+  	border: dashed 1px #000;
+  }
+
+
+
+  /* fixed 2 column left
+  ----------------------------------------------- */
+  #twocolumn-left #header .wrapper {
+  	background: url(/-/includes/style/victoria/desert/fixed-left-headerwrapper.gif) no-repeat left bottom;
+  }
+  #twocolumn-left #container {
+  	background: url(/-/includes/style/victoria/desert/fixed-left-container.gif) repeat-y;
+  }
+  #twocolumn-left #footer {
+  	background: url(/-/includes/style/victoria/desert/fixed-left-footer.gif) no-repeat left bottom;
+  }
+
+
+  /* fixed 2 column right
+  ----------------------------------------------- */
+  #twocolumn-right #header .wrapper {
+  	background: url(/-/includes/style/victoria/desert/fixed-right-headerwrapper.gif) no-repeat left bottom;
+  }
+  #twocolumn-right #container {
+  	background: url(/-/includes/style/victoria/desert/fixed-right-container.gif) repeat-y;
+  }
+  #twocolumn-right #footer {
+  	background: url(/-/includes/style/victoria/desert/fixed-right-footer.gif) no-repeat left bottom;
+  }
+
+
+  /* fixed 3 column
+  ----------------------------------------------- */
+  #threecolumn #header .wrapper {
+  	background: url(/-/includes/style/victoria/desert/fixed-three-headerwrapper.gif) no-repeat left bottom;
+  }
+  #threecolumn #container {
+  	background: url(/-/includes/style/victoria/desert/fixed-three-container.gif) repeat-y;
+  }
+  #threecolumn #footer {
+  	background: url(/-/includes/style/victoria/desert/fixed-three-footer.gif) no-repeat left bottom;
+  }
+  #threecolumn #sidebar h3, #threecolumn #sidebar-alternate h3 {
+  	background: url(/-/includes/style/victoria/desert/h3-sidebar-border-3col.gif) no-repeat center bottom;
+  }
+
+
+  /* liquid 2 column, right and left
+  ----------------------------------------------- */
+
+  #twocolumn-liquid-left h1, #twocolumn-liquid-right h1 {
+  	margin: 0;
+  	background: url(/-/includes/style/victoria/desert/liquid-header-left.gif) no-repeat left top;
+  }
+  #twocolumn-liquid-left #header, #twocolumn-liquid-right #header {
+  	background: #DEDEDE url(/-/includes/style/victoria/desert/liquid-header-bg.gif) repeat-x;
+  }
+  #twocolumn-liquid-left #container #header .wrapper, #twocolumn-liquid-right #container #header .wrapper {
+  	background: url(/-/includes/style/victoria/desert/liquid-header-right.gif) no-repeat right top;
+  }
+  #twocolumn-liquid-left #container #header p.description, #twocolumn-liquid-right #container #header p.description {
+  	background: url(/-/includes/style/victoria/desert/liquid-header-desc.gif) repeat-y left top;
+  }
+
+
+  #twocolumn-liquid-left #footer, #twocolumn-liquid-right #footer {
+  	background: url(/-/includes/style/victoria/desert/liquid-left-footer.gif) no-repeat left bottom;
+  }
+  #twocolumn-liquid-left #container #footer .wrapper, #twocolumn-liquid-right #container #footer .wrapper {
+  	background: url(/-/includes/style/victoria/desert/liquid-right-footer.gif) no-repeat right bottom;
+  }
+
+
+  #twocolumn-liquid-left #container, #twocolumn-liquid-right #container {
+  	background: #fff url(/-/includes/style/victoria/desert/liquid-left-container.gif) repeat-y;
+  }
+  #twocolumn-liquid-left #container .wrapper, #twocolumn-liquid-right #container .wrapper {
+  	background: url(/-/includes/style/victoria/desert/liquid-right-container.gif) repeat-y right top;
+  }
+
+  /** END CUSTOM SKIN **/
+  </style>
+
+  <!-- Hack to avoid flash of unstyled content in IE -->
+  <script> </script>
+</head>
+
+<body id="onecolumn">
+  <div id="container">
+    <div class="wrapper">
+      <div id="header">
+        <div class="wrapper">
+          <h1 id="page-title"><div id='g_title'>What's the Story</div></h1>
+          <div style="clear: both;"></div>
+          <p class="description"><div id='g_description'><P></P>here is a little blurb on how and why this page exists.</div></p>
+          <div style="clear: both"></div>
+        </div>
+      </div>
+      <!-- /editable --><!-- /wrapper --><!-- /header -->
+      <div id="main-content">
+        
+        <div class="wrapper">
+          <div class="content-item "><div id='g_body'><H3>When did this all start?</H3>
+<P>Well, I'm a software developer (also for web sites) and am interested in the latest standards and cool web technologies that continiously grow.&nbsp; I was looking into AJAX and stumbled upon Babble.&nbsp; I played it a few times, love it, invited my wife to try it out.</P>
+<H3>Why did you decide to create clues?</H3>
+<P>One Sunday my mrpresident was struggling with Babble and was patiently waiting for some two letter clues.&nbsp; I looked at the grid and&nbsp;a big&nbsp;challenge was tempting me. Can I do it? Can I write a piece of software to create clues?</P>
+<H3>How long did it take?</H3>
+<P>I would say I spent 4 hours on the first day, and then 3 more hours over the next month or so.&nbsp; There where a few hurdles to get across - like Qu words and also to speed it up - 4 hours was just too long!&nbsp; On average it's about 10mins to get the clues done.</P>
+<H3>How does it work?</H3>
+<P>I started with a plan. Lets get all possible words into a big list, and go through all possible combinations of connecting letters in a Babble grid and work out which ones are there, and where they sit.</P>
+<P>I sucked all the words sized 4 letters to 11 letters from the internet, put it all into a Database.</P>
+<P>There are some cool logic in solving, doing things like :</P>
+<P>1) Can't turn back on yourself - reusing the same letter twice.</P>
+<P>2) Have to test each letter for each word length - as some words don't have smaller variations.</P>
+<P>3) Doing some pretesting for any words starting with certain combinations to speed it up.</P>
+<P>Here is a screen shot of my creation :</P>
+<P class=separator style="CLEAR: both; TEXT-ALIGN: center"><A style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; MARGIN-LEFT: 1em; BORDER-LEFT: 0px; MARGIN-RIGHT: 1em; BORDER-BOTTOM: 0px; BACKGROUND-COLOR: transparent; cssFloat: " href="Solver.jpg/Solver-full.jpg"><IMG style="cssFloat: " src="Solver.jpg/Solver-full.jpg" Bg="474"></A></P>
+<P>&nbsp;</P>
+<H3>What do you do each day?</H3>
+<P>When a Babble grid flips, I type all the grid letters into my program. I then hit Solve, and it finds all the words and then spits them out as clues.</P>
+<P>I then paste this into the web page.</P>
+<P>I also click another button to create the boxless clues, and page that into another web.&nbsp; </P>
+<P>It's not completely automated yet - haven't found a way to grab the letters from the grid automatically. Not sure if I would do it if I solved that one.</P>
+<H3>Do you cheat?</H3>
+<P>No, it is not in my character to cheat. In fact, I rarely have the time to play babble - Many many things on all at once!&nbsp; I also don't help anyone else to cheat - what's the point!</P>
+<H3>Do you know dr_god or have an association with&nbsp;<A href="http://www.playbabble.com">www.playbabble.com</A>?&nbsp;</H3>
+<P>No.&nbsp; The only contact I've had with dr_god is to congratulate him&nbsp;on his creation, and request a link be added for the clues to be on 'friends of babble'.</P>
+<P>I've upgraded to Pro Babbler and promote others to contribute to the game to keep it coming.</P>
+<P>The only profits I get is the lovely comments from all the fellow babblers.</P></div></div>
+          <div style="clear: both"></div>
+        </div>
+      </div>
+      <!-- /wrapper --><!-- /main-content -->
+      <div id="footer"><div class="wrapper">
+        <hr />
+        <p><div id='g_footer'><P>Thanks for stopping by, hope you had a pleasant time.</P></div></p>
+        <div style="clear: both"></div>
+      </div></div>
+      <!-- /wrapper --><!-- /footer -->
+    </div>
+  </div>
+<!-- /wrapper --><!-- /container -->
+
+<div id="extraDiv1"><span></span></div><div id="extraDiv2"><span></span></div>
+<div id="extraDiv3"><span></span></div><div id="extraDiv4"><span></span></div>
+<div id="extraDiv5"><span></span></div><div id="extraDiv6"><span></span></div>
+
+</body>
+</html>
