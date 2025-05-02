@@ -1,0 +1,1 @@
+reg add "HKCU\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" /v BabbleExpert.exe /t REG_DWORD /d 11001 /f
