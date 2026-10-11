@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Voice Canvas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Pacifico&family=Monoton&family=Righteous&family=Lobster&family=Permanent+Marker&family=Rubik+Mono+One&family=Fascinate&family=Abril+Fatface&family=Creepster&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{height:100%;margin:0;background:#05020f;overflow:hidden;font-family:"Trebuchet MS",system-ui,sans-serif;color:#fff;-webkit-tap-highlight-color:transparent}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block}
+#hint{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;text-align:center;transition:opacity 1.2s;padding:20px}
+#hint h1{font-family:Bungee,Impact,sans-serif;font-size:clamp(48px,16vw,120px);margin:0;background:linear-gradient(90deg,#ff2d95,#ffe600,#00f5d4,#7b2ff7,#ff2d95);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 6s linear infinite}
+#hint p{font-family:Pacifico,cursive;font-size:clamp(18px,5vw,30px);margin:8px 0 0;opacity:.85}
+@keyframes flow{to{background-position:300% 0}}
+#live{position:fixed;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 14px);text-align:center;font-size:15px;opacity:.75;padding:0 70px;min-height:20px;pointer-events:none;text-shadow:0 0 8px #000}
+#side{position:fixed;right:10px;top:calc(env(safe-area-inset-top,0px) + 10px);display:flex;flex-direction:column;gap:10px;z-index:3}
+#side button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(20,10,40,.55);color:#fff;font-size:20px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+#bar{position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);display:flex;flex-direction:column;align-items:center;gap:10px;z-index:3}
+#mic{font-size:18px;font-weight:700;color:#fff;border:0;border-radius:40px;padding:16px 30px;background:linear-gradient(90deg,#ff2d95,#7b2ff7,#00c2ff);background-size:200% 100%;box-shadow:0 0 28px rgba(255,45,149,.55);animation:flow2 4s linear infinite}
+#mic.on{background:linear-gradient(90deg,#ff3b3b,#ff9d00,#ff2d95);box-shadow:0 0 0 0 rgba(255,60,90,.7);animation:pulse 1.2s infinite}
+@keyframes flow2{to{background-position:200% 0}}
+@keyframes pulse{70%{box-shadow:0 0 0 24px rgba(255,60,90,0)}100%{box-shadow:0 0 0 0 rgba(255,60,90,0)}}
+#txt{width:min(80vw,380px);padding:12px 16px;font-size:16px;border-radius:30px;border:1px solid rgba(255,255,255,.35);background:rgba(20,10,40,.65);color:#fff;outline:none;text-align:center}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hint"><h1>SPEAK</h1><p>and watch your words become art</p></div>
+<div id="live"></div>
+<div id="side">
+  <button id="bMode" title="Symmetry">✦</button>
+  <button id="bKey" title="Type words">⌨</button>
+  <button id="bSave" title="Save image">⤓</button>
+  <button id="bClear" title="Clear">✕</button>
+</div>
+<div id="bar">
+  <input id="txt" placeholder="type a word, press Enter" hidden autocomplete="off">
+  <button id="mic">🎙 Tap to speak</button>
+</div>
+
+<script>
+const cv=document.getElementById('c'),ctx=cv.getContext('2d');
+const $=id=>document.getElementById(id);
+const R=(a,b)=>a+Math.random()*(b-a), pick=a=>a[Math.random()*a.length|0];
+let W,H,dpr;
+function resize(){
+  dpr=Math.min(window.devicePixelRatio||1,2);W=innerWidth;H=innerHeight;
+  cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.globalCompositeOperation='source-over';ctx.fillStyle='#05020f';ctx.fillRect(0,0,W,H);
+}
+addEventListener('resize',resize);resize();
+
+const FONTS=[['Bungee','sans-serif',''],['Pacifico','cursive',''],['Monoton','sans-serif',''],['Righteous','sans-serif',''],['Lobster','cursive',''],['Permanent Marker','cursive',''],['Rubik Mono One','sans-serif',''],['Fascinate','cursive',''],['Abril Fatface','serif',''],['Creepster','cursive',''],['Georgia','serif','italic bold'],['Impact','sans-serif',''],['Courier New','monospace','bold']];
+if(document.fonts)FONTS.forEach(f=>document.fonts.load('40px "'+f[0]+'"').catch(()=>{}));
+
+const BEH=['fall','rise','grow','sway','spiral','grow','spiral'];
+const MODES=['Mirror','Quad mirror','Kaleidoscope'];
+let mode=0,parts=[],hueCur=R(0,360),MAX=170;
+
+function spawn(text,o={}){
+  if(parts.length>MAX)return;
+  const F=pick(FONTS),b=o.b||pick(BEH);
+  let size=R(.55,1)*Math.min(W,H)*(o.big?.26:.14);
+  size=Math.min(size,(W*.7)/Math.max(text.length*.55,1));
+  size=Math.max(size,18);if(o.size)size=o.size;
+  const p={t:text,f:F,b,size,x:o.x!==undefined?o.x:R(-.4,.4)*W,y:o.y!==undefined?o.y:R(-.4,.4)*H,
+    vx:o.vx!==undefined?o.vx:R(-.6,.6),vy:R(-.8,.8),rot:R(-.5,.5)*(Math.random()<.3?6:1),vr:R(-.012,.012),
+    sc:1,age:0,life:o.life||R(170,330),hue:o.hue!==undefined?o.hue:R(0,360),out:Math.random()<.22,
+    ph:R(0,6.28),amp:R(40,170),fr:R(.5,1.6),ang:R(0,6.28),rad:R(5,40),dir:Math.random()<.5?1:-1,g:R(.02,.06),letter:!!o.letter};
+  if(b==='fall'){p.y=o.y!==undefined?o.y:R(-.5,-.2)*H;p.vy=R(.5,2)}
+  if(b==='rise'){p.y=o.y!==undefined?o.y:R(.2,.5)*H;p.vy=-R(.5,2)}
+  p.x0=p.x;parts.push(p);
+}
+
+function update(p){
+  p.age++;const k=p.age/p.life;
+  switch(p.b){
+    case 'fall':p.vy+=p.g*.5;p.y+=p.vy;p.x+=p.vx;break;
+    case 'rise':p.vy-=p.g*.5;p.y+=p.vy;p.x+=p.vx;break;
+    case 'grow':p.sc=.1+Math.pow(k,.7)*2.5;p.x+=p.vx*.3;p.y+=p.vy*.3;break;
+    case 'sway':p.x=p.x0+Math.sin(p.age*.045*p.fr+p.ph)*p.amp;p.y+=p.vy*.8;p.sc=1+Math.sin(p.age*.05+p.ph)*.25;break;
+    case 'spiral':p.ang+=.026*p.dir;p.rad+=.85;p.x=Math.cos(p.ang)*p.rad;p.y=Math.sin(p.ang)*p.rad;p.rot=p.ang+Math.PI/2;break;
+  }
+  p.rot+=p.vr;
+  return k;
+}
+
+function drawP(p,k){
+  const a=k<.12?k/.12:Math.pow(1-(k-.12)/.88,.8);
+  ctx.globalAlpha=Math.max(0,Math.min(1,a))*.95;
+  const col='hsl('+((p.hue+p.age*.9)%360)+',100%,'+(p.letter?65:58)+'%)';
+  ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.scale(p.sc,p.sc);
+  ctx.font=p.f[2]+' '+p.size+'px "'+p.f[0]+'",'+p.f[1];
+  if(p.out){ctx.strokeStyle=col;ctx.lineWidth=Math.max(1.5,p.size/28);ctx.strokeText(p.t,0,0)}
+  else{ctx.fillStyle=col;ctx.fillText(p.t,0,0)}
+  ctx.restore();
+}
+
+let last=0;
+function frame(){
+  requestAnimationFrame(frame);
+  ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;
+  ctx.fillStyle='rgba(5,2,15,.08)';ctx.fillRect(0,0,W,H);
+  if(Math.random()<.07)spawn('✦',{size:R(14,34),life:R(100,220),b:pick(['fall','rise','sway']),hue:R(0,360)});
+  ctx.globalCompositeOperation='lighter';
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.save();ctx.translate(W/2,H/2);
+  for(let i=parts.length-1;i>=0;i--){
+    const p=parts[i],k=update(p);
+    if(k>=1){
+      if(!p.letter&&p.t.length>1&&p.t!=='✦'&&Math.random()<.4){
+        [...p.t].slice(0,8).forEach(ch=>spawn(ch,{letter:1,size:p.size*.5,x:p.x,y:p.y,hue:p.hue+R(-30,30),b:pick(['fall','rise','spiral']),life:R(80,160),vx:R(-2,2)}));
+      }
+      parts.splice(i,1);continue;
+    }
+    if(mode===0){
+      for(const sx of [1,-1]){ctx.save();ctx.scale(sx,1);drawP(p,k);ctx.restore()}
+    }else if(mode===1){
+      for(const sx of [1,-1])for(const sy of [1,-1]){ctx.save();ctx.scale(sx,sy);drawP(p,k);ctx.restore()}
+    }else{
+      for(let r=0;r<6;r++)for(const s of [1,-1]){ctx.save();ctx.rotate(r*Math.PI/3);ctx.scale(s,1);drawP(p,k);ctx.restore()}
+    }
+  }
+  ctx.restore();
+}
+frame();
+
+function burst(word){
+  const w=word.replace(/[^\p{L}\p{N}'’-]/gu,'');
+  if(!w)return;
+  hueCur=(hueCur+R(40,110))%360;
+  spawn(w,{big:1,hue:hueCur});
+  const n=Math.random()<.6?1+(Math.random()*2|0):0;
+  for(let i=0;i<n;i++)spawn(Math.random()<.4?w.toUpperCase():w.toLowerCase(),{hue:hueCur+R(-40,40)});
+  $('hint').style.opacity=0;
+}
+
+/* ---------- speech ---------- */
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+let rec,listening=false,seen={},wake=null,liveT;
+function say(t,ms){const el=$('live');el.textContent=t;clearTimeout(liveT);if(ms)liveT=setTimeout(()=>el.textContent='',ms)}
+
+function startRec(){
+  rec=new SR();rec.continuous=true;rec.interimResults=true;rec.lang=navigator.language||'en-AU';seen={};
+  rec.onresult=e=>{
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      const t=e.results[i][0].transcript.trim(),ws=t.split(/\s+/).filter(Boolean),n=seen[i]||0;
+      if(ws.length>n){ws.slice(n).forEach((w,j)=>setTimeout(()=>burst(w),j*140));seen[i]=ws.length}
+      say(ws.slice(-6).join(' '),4000);
+    }
+  };
+  rec.onerror=e=>{
+    if(e.error==='not-allowed'||e.error==='service-not-allowed'){
+      stop();say('Microphone blocked — allow it in your browser settings, or open this page directly (not in a preview) and try again.',9000);
+    }
+  };
+  rec.onend=()=>{seen={};if(listening)setTimeout(()=>{try{startRec()}catch(_){}},250)};
+  try{rec.start()}catch(_){}
+}
+async function start(){
+  if(!SR){
+    say('Speech recognition isn\'t supported here — try Chrome (Android) or Safari (iPhone). You can type words instead.',8000);
+    $('txt').hidden=false;return;
+  }
+  listening=true;$('mic').classList.add('on');$('mic').textContent='⏹ Listening… tap to stop';
+  startRec();
+  try{if(navigator.wakeLock)wake=await navigator.wakeLock.request('screen')}catch(_){}
+}
+function stop(){
+  listening=false;try{rec&&rec.stop()}catch(_){}
+  $('mic').classList.remove('on');$('mic').textContent='🎙 Tap to speak';
+  try{wake&&wake.release()}catch(_){}
+}
+$('mic').onclick=()=>listening?stop():start();
+document.addEventListener('visibilitychange',async()=>{
+  if(!document.hidden&&listening){try{if(navigator.wakeLock)wake=await navigator.wakeLock.request('screen')}catch(_){}}
+});
+
+/* ---------- controls ---------- */
+$('bMode').onclick=()=>{mode=(mode+1)%3;say('Symmetry: '+MODES[mode],1800)};
+$('bClear').onclick=()=>{parts=[];ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;ctx.fillStyle='#05020f';ctx.fillRect(0,0,W,H)};
+$('bSave').onclick=()=>{try{const a=document.createElement('a');a.href=cv.toDataURL('image/png');a.download='voice-art.png';a.click()}catch(_){say('Could not save image',2000)}};
+$('bKey').onclick=()=>{const t=$('txt');t.hidden=!t.hidden;if(!t.hidden)t.focus()};
+$('txt').addEventListener('keydown',e=>{
+  if(e.key==='Enter'){e.target.value.trim().split(/\s+/).forEach((w,j)=>setTimeout(()=>burst(w),j*140));e.target.value=''}
+});
+</script>
+</body>
+</html>
