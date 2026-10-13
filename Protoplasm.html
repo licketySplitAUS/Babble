@@ -34,6 +34,12 @@ float fbm(vec2 p){float s=0.,a=.5;mat2 m=mat2(.8,-.6,.6,.8);
   for(int i=0;i<4;i++){s+=a*n(p);p=m*p*2.03+7.1;a*=.5;}return s;}
 vec3 hsv(vec3 c){vec4 K=vec4(1.,2./3.,1./3.,3.);vec3 p=abs(fract(c.xxx+K.xyz)*6.-K.www);
   return c.z*mix(K.xxx,clamp(p-K.xxx,0.,1.),c.y);}
+float dot2(vec2 v){return dot(v,v);}
+float sdHeart(vec2 p){
+  p.x=abs(p.x);
+  if(p.y+p.x>1.) return sqrt(dot2(p-vec2(.25,.75)))-sqrt(2.)/4.;
+  return sqrt(min(dot2(p-vec2(0.,1.)),dot2(p-.5*max(p.x+p.y,0.))))*sign(p.x-p.y);
+}
 void main(){
   vec2 uv=(gl_FragCoord.xy-.5*R)/R.y;
   vec2 lp=uv*1.25, p=lp+O;               // lp: local coords (waves), p: travelling coords (noise)
@@ -49,10 +55,13 @@ void main(){
   float val=.40+.42*r+.12*w;
   for(int i=0;i<3;i++){
     vec2 d=uv-B[i].xy+(q-.5)*.3;
-    float a=atan(d.y,d.x), vt=S[i].w;
-    float amp=(.12+.3*V)*(1.+(1.-vt)*.9);
-    float def=1.+amp*sin(a*3.+S[i].x+T*.22)+amp*.65*sin(a*2.+S[i].y-T*.17)+amp*.35*sin(a*5.+S[i].z+T*.28);
-    float m=exp(-pow(length(d)/(def*max(B[i].z,.001)),2.)*1.4)*vt;
+    float vt=S[i].w, amp=(.12+.3*V)*(1.+(1.-vt)*.9);
+    float ca=.3*sin(S[i].z+T*.15), c=cos(ca), sn=sin(ca);   // the heart slowly sways
+    d=mat2(c,-sn,sn,c)*d;
+    vec2 hp=d/(max(B[i].z,.001)*1.7)+vec2(0.,.5);
+    hp+=amp*.4*vec2(sin(hp.y*3.+S[i].x+T*.22),sin(hp.x*3.+S[i].y-T*.17));   // soft amoeba wobble
+    float m=1.-smoothstep(-.3,.7,sdHeart(hp));
+    m*=m*vt;
     hue+=m*B[i].w; val+=m*.26; sat-=m*.12;
   }
   float warm=0.,cool=0.;
