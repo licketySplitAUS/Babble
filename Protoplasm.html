@@ -48,9 +48,9 @@ void main(){
   float al=dot(lp,D)-P, ac=dot(lp,dp);   // phase P travels the ripples, so turning never whips them
   float w =sin(al*2.0-T*.12+3.*fbm(p*.7+q*2.))*.5+.5;
   float w2=sin(al*1.0+ac*.55-T*.08+q.x*4.)*.5+.5;
-  vec2 pp=p+(q-.5)*1.9+D*(w-.5)*(.35+E*.9+A*.8);
+  vec2 pp=p+(q-.5)*1.9+D*(w-.5)*(.35+E*.9+A*4.);
   float r=fbm(pp*.8+q*1.5);
-  float hue=H+r*.42+w2*.14+(w-.5)*(.07+E*.2+A*.15);
+  float hue=H+r*.42+w2*.14+(w-.5)*(.07+E*.2+A*.5);
   float sat=.52+.22*r-.05*w2;
   float val=.40+.42*r+.12*w;
   for(int i=0;i<3;i++){
@@ -103,6 +103,7 @@ const blobs=[0,1,2].map(i=>{
 
 /* ---------- motion ---------- */
 let lastO=null;
+const AX=10;    // sound influence: 1 = old strength
 const RX=1.7;   // reaction speed: how quickly it answers motion, touch and sound
 const push=(x,y)=>{vel[0]+=x*RX;vel[1]+=y*RX;};
 function onMotion(e){const a=e.acceleration,r=e.rotationRate;
@@ -131,8 +132,8 @@ function listen(dt){
     an.getByteFrequencyData(fd);
     const avg=(a,b)=>{let s=0;for(let i=a;i<b;i++)s+=fd[i];return s/(b-a)/255;};
     const v=[avg(1,120),avg(1,4),avg(24,120)];
-    for(let i=0;i<3;i++)pk[i]=Math.max(v[i],pk[i]*(1-dt*.04),.02); // adapts, so quiet rooms still register
-    tl=Math.min(1,v[0]/pk[0]);tb=Math.min(1,v[1]/pk[1]);th=Math.min(1,v[2]/pk[2]);
+    for(let i=0;i<3;i++)pk[i]=Math.max(v[i],pk[i]*(1-dt*.1),.02); // adapts, so quiet rooms still register
+    tl=Math.min(1,1.4*v[0]/pk[0]);tb=Math.min(1,1.4*v[1]/pk[1]);th=Math.min(1,1.4*v[2]/pk[2]);
   }
   lvl=ease(lvl,tl,dt);bass=ease(bass,tb,dt);treb=ease(treb,th,dt);
 }
@@ -185,17 +186,17 @@ function frame(now){
   const ssp=Math.hypot(sv[0],sv[1]);
   if(ssp>.01){let d=Math.atan2(sv[1],sv[0])-ang;d=Math.atan2(Math.sin(d),Math.cos(d));ang+=d*Math.min(1,dt*.6*RX);}
   else ang+=dt*.02;
-  ang+=(treb-.3)*dt*.12*Math.min(1,lvl*2);       // bright sounds slowly turn the current
+  ang+=(treb-.3)*dt*.12*AX*Math.min(1,lvl*2);       // bright sounds slowly turn the current
   const dx=Math.cos(ang),dy=Math.sin(ang);
 
-  off[0]+=(.012+vel[0]+dx*lvl*.05)*dt;off[1]+=(.008+vel[1]+dy*lvl*.05)*dt;
-  phase+=(.02+(vel[0]*dx+vel[1]*dy)*1.5+lvl*.22+bass*.05)*dt;   // sound drives the ripples along
+  off[0]+=(.012+vel[0]+dx*lvl*.05*AX)*dt;off[1]+=(.008+vel[1]+dy*lvl*.05*AX)*dt;
+  phase+=(.02+(vel[0]*dx+vel[1]*dy)*1.5+(lvl*.22+bass*.05)*AX*.6)*dt;   // sound drives the ripples along
   vel[0]*=Math.exp(-dt*.9);vel[1]*=Math.exp(-dt*.9);
   if(sp>1.2){vel[0]*=1.2/sp;vel[1]*=1.2/sp;}
   energy+=(Math.min(1,sp*2.5)-energy)*Math.min(1,dt*.6*RX);
 
-  visc=Math.max(.05,Math.min(1,.5+.4*Math.sin(T*.05)+.1*Math.sin(T*.13+2)-lvl*.2));  // sound loosens it
-  hue=(hue+dt*(.004+energy*.01+treb*lvl*.012))%1;
+  visc=Math.max(.05,Math.min(1,.5+.4*Math.sin(T*.05)+.1*Math.sin(T*.13+2)-lvl*.6));  // sound loosens it
+  hue=(hue+dt*(.004+energy*.01+treb*lvl*.012*AX))%1;
 
   // protoplasm life cycle + wandering
   const asp=asp0();
@@ -210,11 +211,12 @@ function frame(now){
     const vit=b.p*b.p*(3-2*b.p);
     if(b.p>.3){b.next-=dt;
       if(b.next<=0){b.next=rnd(7,16);b.tx=rnd(-.45,.45)*asp*.9;b.ty=rnd(-.55,.55);b.tr=rnd(.18,.46)*(1.1+energy*.4);b.ts=seeds();}}
-    const k=dt*(.08+.35*(1-visc)+energy*.15+lvl*.1);
+    const k=dt*(.08+.35*(1-visc)+energy*.15+lvl*.5);
     b.x+=(b.tx-b.x)*k;b.y+=(b.ty-b.y)*k;b.r+=(b.tr-b.r)*k*1.2;
     for(let j=0;j<3;j++)b.s[j]+=(b.ts[j]-b.s[j])*k*.6;
     b.x+=vel[0]*dt*.25;b.y+=vel[1]*dt*.25;
-    const br=b.r*(.3+.7*vit)*(1+.06*Math.sin(T*.4+i*2))*(1+bass*.14);
+    const sw=lvl*.04*AX*dt;b.x+=dx*sw;b.y+=dy*sw;   // sound carries the shapes along the current
+    const br=b.r*(.3+.7*vit)*(1+.06*Math.sin(T*.4+i*2))*(1+bass*.5);
     bArr.set([b.x,b.y,br,b.hs],i*4);sArr.set([b.s[0],b.s[1],b.s[2],vit],i*4);
   });
 
