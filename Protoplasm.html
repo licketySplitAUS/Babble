@@ -94,7 +94,8 @@ const blobs=[0,1,2].map(i=>{
 
 /* ---------- motion ---------- */
 let lastO=null;
-const push=(x,y)=>{vel[0]+=x;vel[1]+=y;};
+const RX=1.7;   // reaction speed: how quickly it answers motion, touch and sound
+const push=(x,y)=>{vel[0]+=x*RX;vel[1]+=y*RX;};
 function onMotion(e){const a=e.acceleration,r=e.rotationRate;
   if(a&&a.x!=null)push(a.x*.012,a.y*.012);
   if(r&&r.alpha!=null)push(r.gamma*.0009,-r.beta*.0009);}
@@ -114,7 +115,7 @@ async function startMic(){
     ac.resume();
   }catch(_){}
 }
-const ease=(c,t,dt)=>c+(t-c)*Math.min(1,dt*(t>c?1.6:.5));
+const ease=(c,t,dt)=>c+(t-c)*Math.min(1,dt*RX*(t>c?1.6:.5));
 function listen(dt){
   let tl=0,tb=0,th=0;
   if(an){
@@ -171,9 +172,9 @@ function frame(now){
 
   // current: smoothed so direction turns slowly and ripples never whip
   const sp=Math.hypot(vel[0],vel[1]);
-  sv[0]+=(vel[0]-sv[0])*Math.min(1,dt*.8);sv[1]+=(vel[1]-sv[1])*Math.min(1,dt*.8);
+  sv[0]+=(vel[0]-sv[0])*Math.min(1,dt*.8*RX);sv[1]+=(vel[1]-sv[1])*Math.min(1,dt*.8*RX);
   const ssp=Math.hypot(sv[0],sv[1]);
-  if(ssp>.01){let d=Math.atan2(sv[1],sv[0])-ang;d=Math.atan2(Math.sin(d),Math.cos(d));ang+=d*Math.min(1,dt*.6);}
+  if(ssp>.01){let d=Math.atan2(sv[1],sv[0])-ang;d=Math.atan2(Math.sin(d),Math.cos(d));ang+=d*Math.min(1,dt*.6*RX);}
   else ang+=dt*.02;
   ang+=(treb-.3)*dt*.12*Math.min(1,lvl*2);       // bright sounds slowly turn the current
   const dx=Math.cos(ang),dy=Math.sin(ang);
@@ -182,7 +183,7 @@ function frame(now){
   phase+=(.02+(vel[0]*dx+vel[1]*dy)*1.5+lvl*.22+bass*.05)*dt;   // sound drives the ripples along
   vel[0]*=Math.exp(-dt*.9);vel[1]*=Math.exp(-dt*.9);
   if(sp>1.2){vel[0]*=1.2/sp;vel[1]*=1.2/sp;}
-  energy+=(Math.min(1,sp*2.5)-energy)*Math.min(1,dt*.6);
+  energy+=(Math.min(1,sp*2.5)-energy)*Math.min(1,dt*.6*RX);
 
   visc=Math.max(.05,Math.min(1,.5+.4*Math.sin(T*.05)+.1*Math.sin(T*.13+2)-lvl*.2));  // sound loosens it
   hue=(hue+dt*(.004+energy*.01+treb*lvl*.012))%1;
@@ -210,18 +211,18 @@ function frame(now){
 
   // touches glide, never snap
   touches.forEach(t=>{
-    const [x,y]=toUV(t.px,t.py),k=Math.min(1,dt*3);
+    const [x,y]=toUV(t.px,t.py),k=Math.min(1,dt*3*RX);
     t.sx+=(x-t.sx)*k;t.sy+=(y-t.sy)*k;
     if(t.w){t.w.x+=(t.sx-t.w.x)*k;t.w.y+=(t.sy-t.w.y)*k;
       if(Math.hypot(t.sx-t.lx,t.sy-t.ly)>.14){t.w.held=false;deposit(t);}}
     if(t.blob&&t.blob.p>.3){const b=t.blob;
-      b.tx+=(t.sx-b.tx)*dt*.12;b.ty+=(t.sy-b.ty)*dt*.12;
-      b.tr=Math.min(.5,b.tr+dt*.03);b.next=Math.max(b.next,4);
+      b.tx+=(t.sx-b.tx)*dt*.12*RX;b.ty+=(t.sy-b.ty)*dt*.12*RX;
+      b.tr=Math.min(.5,b.tr+dt*.03*RX);b.next=Math.max(b.next,4);
       if(b.ph==='live')b.lt=Math.max(b.lt,6);}
   });
   for(let i=warms.length-1;i>=0;i--){const w=warms[i];
-    if(w.held){w.s+=(w.max-w.s)*Math.min(1,dt*.8);w.r=Math.min(.34,w.r+dt*.04);}
-    else{w.s*=Math.exp(-dt*.3);w.r+=dt*.01;w.x+=vel[0]*dt*.35;w.y+=vel[1]*dt*.35;if(w.s<.008)warms.splice(i,1);}}
+    if(w.held){w.s+=(w.max-w.s)*Math.min(1,dt*.8*RX);w.r=Math.min(.34,w.r+dt*.04);}
+    else{w.s*=Math.exp(-dt*.3*RX);w.r+=dt*.01;w.x+=vel[0]*dt*.35;w.y+=vel[1]*dt*.35;if(w.s<.008)warms.splice(i,1);}}
   wArr.fill(0);warms.forEach((w,i)=>wArr.set([w.x,w.y,w.r,w.s*w.sign],i*4));
 
   gl.uniform4fv(uW,wArr);
