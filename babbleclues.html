@@ -1195,12 +1195,20 @@ function SelectAllAndCopy()
     CopyToClipboard();
 }
 
-function PasteInto()
+async function PasteInto()
 {
-   document.bulk.bulkWords.focus();
-
-   PastedText = document.bulk.bulkWords.createTextRange();
-   PastedText.execCommand("Paste");
+   var field = document.bulk.bulkWords;
+   try
+   {
+      field.value = await navigator.clipboard.readText();
+      field.focus();
+      field.dispatchEvent(new Event('input', { bubbles: true }));
+   }
+   catch (error)
+   {
+      field.focus();
+      alert('Click in the Bulk Add box and use your browser Paste command, or press Ctrl+V (Cmd+V on Mac).');
+   }
 }
 
 
@@ -1994,10 +2002,10 @@ lWordArray[151]="858484698283";
 <a name="BulkAdd"></a><span style="FONT-SIZE: 10pt; FONT-FAMILY: Verdana"><b>Bulk Add</b> (one per line)</span><BR>
 <span style="FONT-SIZE: 10pt; FONT-FAMILY: Verdana">Paste it in from Clipboard - after using your mouse to drag over all your Babble entered words - then Right Click on the selection and choose Copy.</span><BR>
 <span style="FONT-SIZE: 10pt; FONT-FAMILY: Verdana">You can leave length points values - it takes the first word.</span><BR>
-<span style="FONT-SIZE: 10pt; FONT-FAMILY: Verdana">Also - don't worry if paste from Firefox adds 'Look Up Word' or tabs - this handles that. If you use Internet Explorer - use the Paste from Clipboard button, otherwise Firefox :Use 'Ctrl V' to paste after clicking in the box.</span><BR>
+<span style="FONT-SIZE: 10pt; FONT-FAMILY: Verdana">Don't worry if pasted words include 'Look Up Word' or tabs - this handles that. Use Paste from Clipboard, or click in the box and press Ctrl+V (Cmd+V on Mac).</span><BR>
 <textarea name="bulkWords" rows=10></textarea><BR>
 <input type="button" onClick="AddBulkWord();" value="Add Bulk" style="width:58px;background:#FFCC00;color:black;font-size:8pt;" >
-<input type="button" onClick="PasteInto();" value="Paste from Clipboard (IE)" style="width:140px;background:#FFCC00;color:black;font-size:8pt;">
+<input type="button" onClick="PasteInto();" value="Paste from Clipboard" style="width:140px;background:#FFCC00;color:black;font-size:8pt;">
 <BR><BR>
 <a name="BulkGrab"></a><span style="FONT-SIZE: 10pt; FONT-FAMILY: Verdana"><b>Bulk Grab</b> (one per line)</span><BR>
 <span style="FONT-SIZE: 10pt; FONT-FAMILY: Verdana">To grab all the clues you've entered in the clues page, to move it from here</span><BR>
