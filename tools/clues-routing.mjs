@@ -11,6 +11,6 @@ export function routingRules(enabled) {
   rules.push(`/selfserve-clues ${sourceOrigin}/index.html 200!`);
   for (const file of ['history-preview.html', 'history-admin.html']) rules.push(`/${file} ${sourceOrigin}/${file} 200!`);
   for (const directory of ['assets', 'history-api', 'history-preview-data', 'api']) rules.push(`/${directory}/* ${sourceOrigin}/${directory}/:splat 200!`);
-  rules.push(`/BabbleWordList.csv ${sourceOrigin}/BabbleWordList.csv 200!`);
+  for (const file of ['BabbleWordList.csv', 'favicon.svg', 'file.svg', 'globe.svg', 'window.svg']) rules.push(`/${file} ${sourceOrigin}/${file} 200!`);
   return rules.join('\n') + '\n';
 }
