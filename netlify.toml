@@ -1,0 +1,11 @@
+[build]
+  command = "node tools/build-clues-site.mjs"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[headers]]
+  for = "/clues-publication.json"
+  [headers.values]
+    Cache-Control = "no-store"
