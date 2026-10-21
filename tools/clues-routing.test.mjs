@@ -9,3 +9,11 @@ test('legacy routes remain unmodified until enabled; preview, API and assets are
   assert.match(routingRules(false), /\/new-babbleclues /);
   assert.match(routingRules(true), /\/history-api\/\* .*\/history-api\/:splat 200!/);
 });
+
+test('Expert guide and illustrations are available on the clues domain in both publication modes', () => {
+  for (const enabled of [false, true]) {
+    const rules = routingRules(enabled);
+    assert.match(rules, /^\/babble-expert\.html https:\/\/selfserveclues.netlify.app\/babble-expert\.html 200!/m);
+    assert.match(rules, /^\/expert-guide\/\* https:\/\/selfserveclues.netlify.app\/expert-guide\/:splat 200!/m);
+  }
+});
