@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { sourceOrigin, routingRules } from './clues-routing.mjs';
+import { withExpertButton } from './expert-button.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const output = path.join(root, 'dist');
@@ -21,9 +22,14 @@ for (const file of files) {
   if (file.startsWith('.') || file.startsWith('tools/') || ['netlify.toml', 'package.json'].includes(file) || file.endsWith('.md')) continue;
   const destination = path.join(output, file);
   await fs.mkdir(path.dirname(destination), { recursive: true });
+  if (file.endsWith('.html')) {
+    const source = await fs.readFile(path.join(root, file), 'utf8');
+    const updated = withExpertButton(source);
+    if (updated !== source) { await fs.writeFile(destination, updated); continue; }
+  }
   await fs.copyFile(path.join(root, file), destination);
 }
-await fs.copyFile(path.join(root, 'babbleclues.html'), path.join(output, 'legacy-babbleclues.html'));
+await fs.copyFile(path.join(output, 'babbleclues.html'), path.join(output, 'legacy-babbleclues.html'));
 await fs.writeFile(path.join(output, '_redirects'), routingRules(selection.enabled));
 await fs.writeFile(path.join(output, 'clues-publication.json'), JSON.stringify({ enabled: selection.enabled, operationId: selection.operationId, builtAt: new Date().toISOString() }));
 console.log(`Public clues mode: ${selection.enabled ? 'new tool' : 'legacy page'} (${selection.operationId}).`);
