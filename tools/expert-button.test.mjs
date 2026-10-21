@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { expertButton, withExpertButton } from './expert-button.mjs';
+import { expertButton, withExpertButton, infoLink } from './expert-button.mjs';
 
 const downloads = '<h3>Download Babble Expert</h3><a href="https://github.com/licketySplitAUS/BabbleExpert/releases/latest/download/BabbleExpert-Windows-Setup.exe">Download for Windows</a><a href="https://github.com/licketySplitAUS/BabbleExpert/releases/latest/download/BabbleExpert-macOS.dmg">Download for Mac</a>';
 test('old and new generator sidebar blocks become one guide button without touching puzzle content', () => {
@@ -17,4 +17,14 @@ test('old and new generator sidebar blocks become one guide button without touch
 test('pages without the Expert download block remain unchanged', () => {
   const html = '<html><head></head><body>Printable clues</body></html>';
   assert.equal(withExpertButton(html), html);
+});
+
+
+test('Info link stays last and right-aligned outside the legacy center tag after daily rebuilds', () => {
+  const source = '<html><head></head><body><div id="g_sidebar"><p>Sidebar content</p></center>\n</div><footer>Footer</footer></body></html>';
+  const result = withExpertButton(source);
+  assert.ok(result.includes('</center>\n' + infoLink + '\n</div>'));
+  assert.equal((result.match(/class="lickety-info-link"/g) || []).length, 1);
+  assert.ok(result.includes('<footer>Footer</footer>'));
+  assert.equal(withExpertButton(result), result);
 });
