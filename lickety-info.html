@@ -60,7 +60,7 @@ footer{margin-top:35px;color:var(--muted);font-size:13px}
   </section>
   <section class="card unseen" aria-labelledby="unseen-title">
     <h2 id="unseen-title">4-letter words not yet seen</h2>
-    <p>Which words in lickety’s search dictionary have never turned up in the recorded grids? Here’s the current list, including the latest published puzzle.</p>
+    <p>Which words in lickety’s search dictionary have never turned up in the recorded grids? Here’s the current list, including the latest published puzzle. The explanation below covers the possible Boggle dice restrictions, with gold highlighting for likely dice conflicts and aqua highlighting for words those rules do not explain.</p>
     <iframe id="unseen-words-frame" src="https://selfserve.r46.me/word-history/unseen-four-letter-words.html?embed=1" title="Four-letter dictionary words not yet seen in recorded grids" loading="lazy" height="420"></iframe>
     <p class="unseen-fallback"><a href="https://selfserve.r46.me/word-history/unseen-four-letter-words.html" target="_blank" rel="noopener noreferrer">Open the list in its own window ↗</a></p>
   </section>
@@ -72,7 +72,7 @@ footer{margin-top:35px;color:var(--muted);font-size:13px}
   window.addEventListener('message', function (event) {
     if (event.origin !== 'https://selfserve.r46.me' || event.source !== frame.contentWindow || event.data?.type !== 'lickety-unseen-height') return;
     var height = event.data.height;
-    if (Number.isFinite(height)) frame.style.height = Math.max(180, Math.min(14000, height)) + 'px';
+    if (Number.isFinite(height)) frame.style.height = Math.max(180, Math.min(40000, height)) + 'px';
   });
 })();
 </script>
