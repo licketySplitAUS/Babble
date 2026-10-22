@@ -25,7 +25,7 @@ for (const file of files) {
   await fs.mkdir(path.dirname(destination), { recursive: true });
   if (file.endsWith('.html')) {
     const source = await fs.readFile(path.join(root, file), 'utf8');
-    const updated = withSiteIcons(withExpertButton(source));
+    const updated = withSiteIcons(withExpertButton(source), file);
     if (updated !== source) { await fs.writeFile(destination, updated); continue; }
   }
   await fs.copyFile(path.join(root, file), destination);
