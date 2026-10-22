@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { sourceOrigin, routingRules } from './clues-routing.mjs';
 import { withExpertButton } from './expert-button.mjs';
+import { withSiteIcons } from './site-icons.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const output = path.join(root, 'dist');
@@ -24,7 +25,7 @@ for (const file of files) {
   await fs.mkdir(path.dirname(destination), { recursive: true });
   if (file.endsWith('.html')) {
     const source = await fs.readFile(path.join(root, file), 'utf8');
-    const updated = withExpertButton(source);
+    const updated = withSiteIcons(withExpertButton(source));
     if (updated !== source) { await fs.writeFile(destination, updated); continue; }
   }
   await fs.copyFile(path.join(root, file), destination);
