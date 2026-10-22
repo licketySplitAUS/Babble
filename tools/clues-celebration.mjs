@@ -1,5 +1,7 @@
 const script = '<script defer src="https://selfserve.r46.me/clues-celebration.js"></script>';
+const identity = '<script defer src="https://selfserve.r46.me/browser-identity.js"></script>';
 export function withCluesCelebration(html) {
-  if (!/function\s+AddBabbleWord\s*\(/.test(html) || html.includes('clues-celebration.js')) return html;
-  return html.replace(/<\/head\s*>/i, match => script + '\n' + match);
+  if (!/function\s+AddBabbleWord\s*\(/.test(html)) return html;
+  if (html.includes('clues-celebration.js')) return html.includes('browser-identity.js') ? html : html.replace(script, () => identity + '\n' + script);
+  return html.replace(/<\/head\s*>/i, match => identity + '\n' + script + '\n' + match);
 }
