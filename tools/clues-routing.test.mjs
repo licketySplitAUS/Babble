@@ -15,5 +15,6 @@ test('Expert guide and illustrations are available on the clues domain in both p
     const rules = routingRules(enabled);
     assert.match(rules, /^\/babble-expert\.html https:\/\/selfserveclues.netlify.app\/babble-expert\.html 200!/m);
     assert.match(rules, /^\/expert-guide\/\* https:\/\/selfserveclues.netlify.app\/expert-guide\/:splat 200!/m);
+    assert.match(rules, /^\/clue-slot-entry\.js https:\/\/selfserveclues.netlify.app\/clue-slot-entry\.js 200!/m);
   }
 });

@@ -1,6 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { expertButton, withExpertButton, infoLink } from './expert-button.mjs';
+import { withClueSlotEntry } from './clue-slot-entry.mjs';
+
+test('slot entry enhancement survives daily generation without changing puzzle content', () => {
+  const source = '<html><head></head><body><script>function AddBabbleWord(word) {}</script>Today\'s clues</body></html>';
+  const result = withClueSlotEntry(source);
+  assert.match(result, /clue-slot-entry\.js/);
+  assert.ok(result.endsWith(source.slice(source.indexOf('</head>'))));
+  assert.equal(withClueSlotEntry(result), result);
+  assert.equal(withClueSlotEntry('<head></head>Printable clues'), '<head></head>Printable clues');
+});
 
 const downloads = '<h3>Download Babble Expert</h3><a href="https://github.com/licketySplitAUS/BabbleExpert/releases/latest/download/BabbleExpert-Windows-Setup.exe">Download for Windows</a><a href="https://github.com/licketySplitAUS/BabbleExpert/releases/latest/download/BabbleExpert-macOS.dmg">Download for Mac</a>';
 test('old and new generator sidebar blocks become one guide button without touching puzzle content', () => {
